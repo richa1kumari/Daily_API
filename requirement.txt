@@ -1,0 +1,4 @@
+python == 2.7
+behave == 1.2.6
+requests == 2.24.0
+allure-behave == 2.9.43

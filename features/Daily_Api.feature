@@ -16,15 +16,4 @@ Feature: Verify if the API returns the traded data of daily time series
     |TIME_SERIES_DAILY  | SHOP.TRT     | compact    | IMG8W99RT7KQ5Y9V |200         |
     |TIME_SERIES_DAILY  | GVP.TRV      | compact    | IMG8W99RT7KQ5Y9V |200         |
     |TIME_SERIES_WEEKLY | ABC          | compact    | abc              |200         |
-
-   Scenario Outline: Verify TIME_SERIES_DAILY API functionality 6th request
-
-    # Enter steps here
-    Given The API param to be posted <function> <symbol> <outputsize> <apikey>
-    When We execute the TIME_SERIES_DAILY GET method for 6th request
-    Then Response from the API is verified for 6th request <responsecode>
-    Examples:
-    |function           | symbol       | outputsize | apikey           |responsecode|
     |TIME_SERIES_DAILY  | GVP.TRV      | compact    | IMG8W99RT7KQ5Y9V |200         |
-
-

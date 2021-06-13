@@ -28,10 +28,10 @@ def step_impl(context):
     response_codes['GET'] = statuscode
 
 
-@then('Response from the API is verified')
-def step_impl(context):
+@then('Response from the API is verified {responsecode}')
+def step_impl(context, responsecode):
     print("Get response code is : ", response_codes['GET'])
-    assert response_codes['GET'] is 200
+    assert response_codes['GET'] is responsecode
 
 
 
@@ -50,9 +50,9 @@ def step_impl(context):
     print ("the response after the Throttle limit has passed ",time_series_response_data['Note'])
 
 
-@then('Response from the API is verified for 6th request')
-def step_impl(context):
+@then('Response from the API is verified for 6th request {responsecode}')
+def step_impl(context, responsecode):
     print("Get response code is : ", response_codes['GET'])
-    assert response_codes['GET'] is 200
+    assert response_codes['GET'] is responsecode
     assert time_series_response_data['Note'] is 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.'
 

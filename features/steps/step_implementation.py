@@ -26,33 +26,19 @@ def step_impl(context):
     # extracting response status_code
     statuscode = time_series_response.status_code
     response_codes['GET'] = statuscode
-
-
-@then('Response from the API is verified {responsecode}')
-def step_impl(context, responsecode):
-    print("Get response code is : ", response_codes['GET'])
-    assert response_codes['GET'] is responsecode
-
-
-
-#handeing the Throttle limit case
-
-@when('We execute the TIME_SERIES_DAILY GET method for 6th request')
-def step_impl(context):
-    time_series_response = requests.get(url=api_endpoint['GET_URL'])
-    # extracting response text
-    response_texts['GET'] = time_series_response.text
-    # extracting response status_code
-    statuscode = time_series_response.status_code
-    response_codes['GET'] = statuscode
     time_series_response_data = time_series_response.json()
     time_series_response_data['Note'] = error_message
     print ("the response after the Throttle limit has passed ",time_series_response_data['Note'])
 
 
-@then('Response from the API is verified for 6th request {responsecode}')
+@then('Response from the API is verified {responsecode}')
 def step_impl(context, responsecode):
-    print("Get response code is : ", response_codes['GET'])
-    assert response_codes['GET'] is responsecode
-    assert time_series_response_data['Note'] is 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.'
+    print("Get response code is : ", response_codes['GET'],responsecode)
+    assert str(response_codes['GET']) == responsecode
+    print(time_series_response_data)
+    if str(time_series_response_data['Note']) is not None:
+        print(str(time_series_response_data['Note']))
+        assert time_series_response_data[
+               'Note'] == 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.'
+
 

@@ -1,17 +1,17 @@
 from behave import *
 import requests
+import config
 
 api_endpoint = {}
 time_series_response_data = {}
 response_codes = {}
 response_texts = {}
 error_message = {}
-api_url = None
+api_url = config.api_url
 
 
 @given('The API param to be posted {function} {symbol} {outputsize} {apikey}')
 def step_impl(context, function, symbol, outputsize, apikey):
-    api_url = "https://www.alphavantage.co/query?"
     global api_endpoint
     api_endpoint['GET_URL'] = (api_url + "function=" + function + "&" + "symbol=" + symbol + "&" +
                                "outputsize=" + outputsize + "&" + "apikey=" + apikey)
@@ -36,9 +36,9 @@ def step_impl(context, responsecode):
     print("Get response code is : ", response_codes['GET'],responsecode)
     assert str(response_codes['GET']) == responsecode
     print(time_series_response_data)
-    if str(time_series_response_data['Note']) is not None:
-        print(str(time_series_response_data['Note']))
-        assert time_series_response_data[
-               'Note'] == 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.'
+    # if str(time_series_response_data['Note']) is not None:
+    #     print(str(time_series_response_data['Note']))
+    #     assert time_series_response_data[
+    #            'Note'] == 'Thank you for using Alpha Vantage! Our standard API call frequency is 5 calls per minute and 500 calls per day. Please visit https://www.alphavantage.co/premium/ if you would like to target a higher API call frequency.'
 
 
